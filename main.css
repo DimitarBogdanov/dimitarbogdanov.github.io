@@ -10,6 +10,10 @@ a {
 	color: #899878;
 }
 
+span {
+	color: #899878;
+}
+
 .noselect {
   -webkit-touch-callout: none;
     -webkit-user-select: none;
