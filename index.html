@@ -55,10 +55,15 @@
 			</div>
 			
 			<div class="footer">
-				<p class="centerText noselect">COPYRIGHT © 2021 DIMITAR BOGDANOV</p>
+				<p class="centerText noselect" id="copyright">COPYRIGHT © DIMITAR BOGDANOV</p>
 			</div>
 		</div>
 		
 		<br class="noselect" />
+	
+		<script>
+		// Copyright text year because I'll 100% forget to update it
+		document.getElementById("copyright").innerText = "COPYRIGHT © " + new Date().getFullYear() + " DIMITAR BOGDANOV"
+		</script>
 	</body>
 </html>
