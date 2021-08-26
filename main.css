@@ -18,6 +18,11 @@ span {
 	color: #899878;
 }
 
+.year {
+	list-style-type: none;
+	font-weight: 600;
+}
+
 .noselect {
   -webkit-touch-callout: none;
     -webkit-user-select: none;
