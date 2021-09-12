@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<!--
+This is a really simple page with shitty JS and shitty CSS.
+It basically pings https://icanhazip.com/ every 500 milliseconds. If the connection
+fails, there's no Internet. If it doesn't, we have access. This is assuming that
+icanhazip won't go down at any point. If it does, you can change it to google.com. I
+certainly hope Google won't cease to exist!
+-->
+
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Have I got Internet?</title>
+	<style>
+		.noInternet {
+			background-color: #7F0000;
+		}
+		.yesInternet {
+			background-color: #007038;
+		}
+		.container {
+			margin: 0px;
+			padding: 0px;
+			height: 100%;
+			color: white;
+			text-align: center;
+			position: fixed;
+			left: 25%;
+			top: 50%;
+			right: 25%;
+		}
+
+		* {
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		}
+		body {
+			margin: 0px;
+			padding: 0px;
+			height: 100vh;
+		}
+		h1 {
+			margin: 0px;
+		}
+	</style>
+</head>
+<body id="body">
+	<p style="margin-top: 5px; margin-left: 5px; color: white;" id="notice">
+		You can download this page to have a quick check at your disposal.
+		<a href="#" style="color: white" onclick="document.getElementById('notice').remove()">
+			Hide
+		</a>
+	</p>
+	<div class="container">
+		<h1 id="text"></h1>
+	</div>
+
+	<script>
+		function offline() {
+			document.getElementById("body").className = "noInternet";
+			document.getElementById("text").innerText = "No connection :(";
+		}
+		function online() {
+			document.getElementById("body").className = "yesInternet";
+			document.getElementById("text").innerText = "Connected to the internet! Yay!";
+		}
+
+		function check() {
+			let req = new XMLHttpRequest();
+			req.onload = online;
+			req.onerror = offline;
+			req.open("GET", "http://icanhazip.com/");
+			req.send();
+		}
+
+		setInterval(check, 500);
+	</script>
+</body>
+</html>
