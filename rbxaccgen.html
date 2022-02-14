@@ -1,59 +1,115 @@
-<!-- sorry for the shit code lol did this in like 30 min -->
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <title>Roblox Account Generator</title>
+    <title>Roblox account generator - Dimitar Bogdanov</title>
+    <link rel="stylesheet" href="./main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+    <meta name="description" content="The website of a 15 year-old guy, interested in software engineering.">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="black">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <script src="https://kit.fontawesome.com/ae0df6760c.js" crossorigin="anonymous"></script>
+
     <style>
         .border {
-            border: 1px solid black;
+            border: 1px solid white;
             margin: 5px;
-        }
-        
-        .container {
-            border: 1px solid black;
-            width: 80%;
         }
     </style>
 </head>
 
 <body>
-    <h1>Roblox Account Generator</h1>
-    <hr>
-    <h3>Click the button below to get a random account.</h3>
-    <h5>Note: this might not work at all. Keep trying until it works!</h5>
-    <button id="gen" onclick="getAccount()">Generate</button>
-    <br>
-    <div id="__template__" style="display: none;">
-        <table class="border">
-            <thead>
-                <tr class="border">
-                    <th colspan="2">Account generator result</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="border">
-                    <td class="border">Username</td>
-                    <td class="border"><textarea name="user" rows=1 readonly style="resize: none;"></textarea></td>
-                </tr>
-                <tr class="border">
-                    <td class="border">Password</td>
-                    <td class="border"><textarea name="pass" rows=1 readonly style="resize: none;"></textarea></td>
-                </tr>
-                <tr class="border">
-                    <td class="border" colspan=2>
-                        <center><button onclick="remove(this);">Remove</button></center>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <center>
-        <div id="cnt" class="container" style="display: inline-block;">
+    <br class="noselect" />
 
+    <div class="container">
+        <div class="header">
+            <h1 class="centerText noselect">Roblox account generator</h1>
         </div>
-    </center>
+
+        <div class="main">
+            <section>
+                <h2 class="noselect"><i class="fas fa-caret-square-right"></i> READ BEFORE USING</h2>
+                <p>
+                    Disable your CORS if this does not work. This can be done with an extension. <a href="https://mybrowseraddon.com/access-control-allow-origin.html">Here's one</a>. This page is 100% guranteed safe (and <a href="https://github.com/DimitarBogdanov/dimitarbogdanov.github.io/blob/main/rbxaccgen.html"
+                        target="_blank">open source</a>). You probably want to disable the extension outside of this website, though.
+                </p>
+                <p>
+                    I don't take any responsibility for what you do with this.
+                </p>
+            </section>
+            <section>
+                <h2 class="noselect"><i class="fas fa-caret-square-right"></i> How this works</h2>
+                <p>
+                    Basically, the way most of these ROBLOX bot accounts are set up is that the password is the reverse of the username. For example, if the username is "User", the password is "resU". Pretty clever! There are groups that have thousands of these accounts
+                    as well.
+                </p>
+                <p>
+                    The template of username this page looks for in a group is "FirstnameLastnameNN", where NN is a two-digit number. For example, a valid name would be BillGates12.
+                </p>
+            </section>
+            <section>
+                <h2 class="noselect"><i class="fas fa-caret-square-right"></i> Magic button</h2>
+                <p>
+                    <button id="gen" onclick="getAccount()">
+						Generate account
+                	</button>
+                    <br /><br />
+                </p>
+            </section>
+            <section>
+                <h2 class="noselect"><i class="fas fa-caret-square-right"></i> Generated accounts</h2>
+
+                <div id="__template__" style="display: none;">
+                    <table class="border">
+                        <thead>
+                            <tr class="border">
+                                <th colspan="2">Account generator result</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border">
+                                <td class="border">Username</td>
+                                <td class="border"><textarea name="user" rows=1 readonly style="resize: none;"></textarea></td>
+                            </tr>
+                            <tr class="border">
+                                <td class="border">Password</td>
+                                <td class="border"><textarea name="pass" rows=1 readonly style="resize: none;"></textarea></td>
+                            </tr>
+                            <tr class="border">
+                                <td class="border" colspan=2>
+                                    <center>
+                                        <button onclick="remove(this);">Remove</button>
+                                        <button onclick="copy(this, 'user');">Copy user</button>
+                                        <button onclick="copy(this, 'pass');">Copy pass</button>
+                                    </center>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>
+                    <div id="cnt" class="container" style="display: inline-block;">
+
+                    </div>
+                </p>
+            </section>
+        </div>
+
+        <div class="footer">
+            <p class="centerText noselect" id="copyright">COPYRIGHT © DIMITAR BOGDANOV</p>
+        </div>
+    </div>
+
+    <br class="noselect" />
 
     <script>
+        // Copyright text year because I'll 100% forget to update it
+        document.getElementById("copyright").innerText = "COPYRIGHT © " + new Date().getFullYear() + " DIMITAR BOGDANOV"
+
         var members = 2000; // rough estimate
         var previous = [];
         var ogCursor = "183218487_1_4adb212a2885b09fd96ab6e167ab9f3d"
@@ -79,7 +135,7 @@
         function getAccount() {
             //if (debounce) return;
             debounce = true;
-            document.getElementById("gen").innerHTML = "Moment mal..."
+            document.getElementById("gen").innerHTML = "Please wait..."
             let url = 'https://groups.roblox.com/v1/groups/2799647/roles/18917235/users?cursor=' + nextCursor + '&limit=50&sortOrder=Desc'
             let req = new XMLHttpRequest();
 
@@ -116,7 +172,7 @@
 
                     showAccount(acc.username)
                     previous.push(acc.username);
-                    document.getElementById("gen").innerHTML = "Generate"
+                    document.getElementById("gen").innerHTML = "Generate account"
                     debounce = false;
                     req = null;
                 }
@@ -151,7 +207,7 @@
 
         function generate() {
             if (debounce === true) return;
-            document.getElementById("gen").innerHTML = "Moment mal..."
+            document.getElementById("gen").innerHTML = "Please wait..."
             debounce = true;
 
             while (true) {
@@ -162,7 +218,22 @@
                 break;
             }
             debounce = false;
-            document.getElementById("gen").innerHTML = "Generate"
+            document.getElementById("gen").innerHTML = "Generate account"
+        }
+
+        function copy(el, name) {
+            el = el.parentElement.parentElement.parentElement.parentElement.querySelectorAll('[name=' + name + ']')[0];
+
+            const text = el.innerHTML;
+
+            navigator.clipboard.writeText(el.innerHTML);
+            el.innerText = "Copied!"
+            el.focus();
+            el.setSelectionRange(0, 900);
+
+            setTimeout(() => {
+                el.innerText = text;
+            }, 500);
         }
     </script>
 </body>
