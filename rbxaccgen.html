@@ -136,7 +136,7 @@
             //if (debounce) return;
             debounce = true;
             document.getElementById("gen").innerHTML = "Please wait..."
-            let url = 'https://groups.roblox.com/v1/groups/3117875/roles/21441130/users?cursor=' + nextCursor + '&limit=50&sortOrder=Desc'
+            let url = 'https://groups.roblox.com/v1/groups/3117875/roles/21441130/users?cursor=' + nextCursor + '&limit=50&sortOrder=Asc'
             let req = new XMLHttpRequest();
 
             var user = null
@@ -144,7 +144,7 @@
             var skipPages = randomNumber(1, 10);
             var i = 0;
             req.onload = () => {
-                var url = 'https://groups.roblox.com/v1/groups/3117875/roles/21441130/users?cursor=' + nextCursor + '&limit=50&sortOrder=Desc'
+                var url = 'https://groups.roblox.com/v1/groups/3117875/roles/21441130/users?cursor=' + nextCursor + '&limit=50&sortOrder=Asc'
 
                 var obj = JSON.parse(req.response)
                 if (i > skipPages) {
@@ -179,7 +179,7 @@
 
                 nextCursor = obj.nextPageCursor
                 if (nextCursor == null) nextCursor = ogCursor;
-                url = 'https://groups.roblox.com/v1/groups/3117875/roles/21441130/users?cursor=' + nextCursor + '&limit=50&sortOrder=Desc'
+                url = 'https://groups.roblox.com/v1/groups/3117875/roles/21441130/users?cursor=' + nextCursor + '&limit=50&sortOrder=Asc'
                 req.open("GET", url);
                 req.send();
                 i++
