@@ -2,10 +2,7 @@
 
 <!--
 This is a really simple page with shitty JS and shitty CSS.
-It basically pings https://icanhazip.com/ every 500 milliseconds. If the connection
-fails, there's no Internet. If it doesn't, we have access. This is assuming that
-icanhazip won't go down at any point. If it does, you can change it to google.com. I
-certainly hope Google won't cease to exist!
+It basically checks window.navigator.onLine every 500 ms.
 -->
 
 <html lang="en">
@@ -61,18 +58,20 @@ certainly hope Google won't cease to exist!
 		function offline() {
 			document.getElementById("body").className = "noInternet";
 			document.getElementById("text").innerText = "No connection :(";
+			document.title = "No Internet :(";
 		}
 		function online() {
 			document.getElementById("body").className = "yesInternet";
 			document.getElementById("text").innerText = "Connected to the internet! Yay!";
+			document.title = "Connected! :)";
 		}
 
 		function check() {
-			let req = new XMLHttpRequest();
-			req.onload = online;
-			req.onerror = offline;
-			req.open("GET", "https://icanhazip.com/");
-			req.send();
+			if (window.navigator.onLine) {
+				online();
+			} else {
+				offline();
+			}
 		}
 
 		setInterval(check, 500);
